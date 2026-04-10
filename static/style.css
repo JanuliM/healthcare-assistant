@@ -1,0 +1,184 @@
+:root {
+    --bg-soft: #f4fbf9;
+    --bg-accent: #dff3ee;
+    --card: #ffffff;
+    --primary: #0f7a66;
+    --primary-strong: #0b5f50;
+    --text-main: #1f2e2b;
+    --text-muted: #4d6762;
+    --border: #d7ebe5;
+    --shadow: 0 18px 50px rgba(11, 95, 80, 0.14);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Nunito Sans", "Segoe UI", sans-serif;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at 18% 18%, rgba(15, 122, 102, 0.18), transparent 36%),
+        radial-gradient(circle at 85% 12%, rgba(58, 162, 139, 0.2), transparent 34%),
+        linear-gradient(135deg, var(--bg-soft), var(--bg-accent));
+}
+
+.page-shell {
+    min-height: 100vh;
+    padding: 24px;
+    display: grid;
+    place-items: center;
+}
+
+.health-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 34px 30px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #ffffff, #f8fffd);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    animation: rise-in 0.55s ease-out;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #e6f6f2;
+    color: var(--primary);
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 6px 14px;
+    letter-spacing: 0.2px;
+}
+
+.badge-cross {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1;
+}
+
+h1 {
+    margin: 18px 0 8px;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    line-height: 1.15;
+}
+
+.subtitle {
+    margin: 0 0 22px;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+}
+
+.symptom-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+input {
+    flex: 1;
+    min-width: 220px;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1px solid #c6e2db;
+    background: #fbfffe;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+    border-color: #53ad98;
+    box-shadow: 0 0 0 4px rgba(83, 173, 152, 0.2);
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 13px 18px;
+    background: linear-gradient(135deg, var(--primary), #1f9d85);
+    color: #ffffff;
+    font-weight: 700;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+button:hover {
+    filter: brightness(1.03);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.response-box {
+    margin-top: 22px;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #bfe2d8;
+    background: #effaf6;
+}
+
+.response-box h3 {
+    margin: 0 0 8px;
+    color: var(--primary-strong);
+}
+
+.response-box p {
+    margin: 0;
+}
+
+.note {
+    margin-top: 16px;
+    color: #46635d;
+    font-size: 0.92rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 640px) {
+    .health-card {
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+
+    .symptom-form {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
