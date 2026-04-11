@@ -8,19 +8,24 @@ def home():
 
     if request.method == "POST":
         symptom_text = request.form["symptom"].lower()
-        possible_causes = []
 
-        if "fever" in symptom_text:
-            possible_causes.append("Viral infection or flu")
-        if "headache" in symptom_text:
-            possible_causes.append("Stress, dehydration, or fatigue")
-        if "cough" in symptom_text:
-            possible_causes.append("Cold or respiratory infection")
+        # symptom flags
+        has_fever = "fever" in symptom_text
+        has_headache = "headache" in symptom_text
+        has_cough = "cough" in symptom_text
+        has_tiredness = "tired" in symptom_text or "fatigue" in symptom_text
 
-        if possible_causes:
-            response = "Possible: " + " | ".join(possible_causes)
+        # smarter logic
+        if has_fever and has_cough:
+            response = "Possible: Flu or viral infection"
+        elif has_headache and has_tiredness:
+            response = "Possible: Stress or dehydration"
+        elif has_cough:
+            response = "Possible: Respiratory infection"
+        elif has_fever:
+            response = "Possible: Infection (monitor temperature)"
         else:
-            response = "Please consult a doctor for proper diagnosis"
+            response = "Symptoms unclear. Please consult a doctor"
 
     return render_template("index.html", response=response)
 
