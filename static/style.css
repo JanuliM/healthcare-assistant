@@ -1,9 +1,10 @@
 :root {
-    --bg-soft: #f4fbf9;
-    --bg-accent: #dff3ee;
+    --bg-soft: #eff8f6;
+    --bg-accent: #d2ece5;
     --card: #ffffff;
     --primary: #0f7a66;
     --primary-strong: #0b5f50;
+    --primary-soft: #dff4ee;
     --text-main: #1f2e2b;
     --text-muted: #4d6762;
     --border: #d7ebe5;
@@ -17,7 +18,7 @@
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: "Nunito Sans", "Segoe UI", sans-serif;
+    font-family: "Segoe UI", Tahoma, sans-serif;
     color: var(--text-main);
     background:
         radial-gradient(circle at 18% 18%, rgba(15, 122, 102, 0.18), transparent 36%),
@@ -34,8 +35,8 @@ body {
 
 .health-card {
     width: 100%;
-    max-width: 700px;
-    padding: 34px 30px;
+    max-width: 880px;
+    padding: 34px 32px;
     border-radius: 24px;
     background: linear-gradient(180deg, #ffffff, #f8fffd);
     border: 1px solid var(--border);
@@ -74,35 +75,59 @@ h1 {
 }
 
 .subtitle {
-    margin: 0 0 22px;
+    margin: 0 0 24px;
     color: var(--text-muted);
     font-size: 1.02rem;
 }
 
 .symptom-form {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    display: grid;
+    gap: 16px;
 }
 
-input {
-    flex: 1;
-    min-width: 220px;
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.field {
+    display: grid;
+    gap: 7px;
+}
+
+.field-wide {
+    grid-column: span 2;
+}
+
+.field span {
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.93rem;
+}
+
+input,
+select {
+    width: 100%;
     padding: 13px 14px;
     border-radius: 12px;
     border: 1px solid #c6e2db;
     background: #fbfffe;
+    color: var(--text-main);
     font: inherit;
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
 }
 
-input:focus {
+input:focus,
+select:focus {
     border-color: #53ad98;
     box-shadow: 0 0 0 4px rgba(83, 173, 152, 0.2);
 }
 
 button {
+    width: 100%;
     border: none;
     border-radius: 12px;
     padding: 13px 18px;
@@ -127,8 +152,8 @@ button:active {
     margin-top: 22px;
     padding: 16px;
     border-radius: 14px;
-    border: 1px solid #bfe2d8;
-    background: #effaf6;
+    border: 1px solid #b5dfd2;
+    background: linear-gradient(180deg, #effaf6, #e7f8f2);
 }
 
 .response-box h3 {
@@ -174,11 +199,11 @@ button:active {
         border-radius: 20px;
     }
 
-    .symptom-form {
-        flex-direction: column;
+    .form-grid {
+        grid-template-columns: 1fr;
     }
 
-    button {
-        width: 100%;
+    .field-wide {
+        grid-column: span 1;
     }
 }

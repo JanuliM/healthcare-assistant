@@ -3,38 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthcare Assistant</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Heart Disease Predictor</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <main class="page-shell">
-        <section class="health-card">
-            <div class="badge" aria-hidden="true">
+    <div class="page-shell">
+        <main class="health-card">
+            <div class="badge">
                 <span class="badge-cross">+</span>
-                <span>Care Support</span>
+                Clinical Screening Tool
             </div>
 
-            <h1>Healthcare Assistant</h1>
-            <p class="subtitle">Describe your symptoms and receive a quick, general guidance note.</p>
+            <h1>Heart Disease Risk Predictor</h1>
+            <p class="subtitle">Provide patient metrics below to generate a quick cardiovascular risk estimate.</p>
 
-            <form method="post" class="symptom-form">
-                <label for="symptom" class="sr-only">Enter your symptoms</label>
-                <input id="symptom" type="text" name="symptom" placeholder="e.g., fever, headache, cough" required>
-                <button type="submit">Analyze Symptoms</button>
+            <form class="symptom-form" method="post">
+                <div class="form-grid">
+                    <label class="field">
+                        <span>Age</span>
+                        <input type="number" name="age" placeholder="Years" required>
+                    </label>
+
+                    <label class="field">
+                        <span>Sex</span>
+                        <select name="sex" required>
+                            <option value="" selected disabled>Select sex</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </label>
+
+                    <label class="field field-wide">
+                        <span>Chest Pain Type</span>
+                        <select name="cp" required>
+                            <option value="" selected disabled>Select chest pain type</option>
+                            <option value="0">Typical angina</option>
+                            <option value="1">Atypical angina</option>
+                            <option value="2">Non-anginal pain</option>
+                            <option value="3">Asymptomatic</option>
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Resting Blood Pressure</span>
+                        <input type="number" name="trestbps" placeholder="mm Hg" required>
+                    </label>
+
+                    <label class="field">
+                        <span>Cholesterol</span>
+                        <input type="number" name="chol" placeholder="mg/dl" required>
+                    </label>
+
+                    <label class="field field-wide">
+                        <span>Fasting Blood Sugar</span>
+                        <select name="fbs" required>
+                            <option value="" selected disabled>Select fasting blood sugar</option>
+                            <option value="1">Above 120 mg/dl</option>
+                            <option value="0">120 mg/dl or below</option>
+                        </select>
+                    </label>
+
+                    <label class="field field-wide">
+                        <span>Resting ECG</span>
+                        <select name="restecg" required>
+                            <option value="" selected disabled>Select ECG status</option>
+                            <option value="0">Normal</option>
+                            <option value="1">ST-T abnormality</option>
+                            <option value="2">Left ventricular hypertrophy</option>
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Max Heart Rate</span>
+                        <input type="number" name="thalach" placeholder="bpm" required>
+                    </label>
+
+                    <label class="field field-wide">
+                        <span>Exercise-Induced Angina</span>
+                        <select name="exang" required>
+                            <option value="" selected disabled>Select option</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Oldpeak</span>
+                        <input type="number" step="0.1" name="oldpeak" placeholder="ST depression" required>
+                    </label>
+
+                    <label class="field">
+                        <span>Slope</span>
+                        <select name="slope" required>
+                            <option value="" selected disabled>Select slope</option>
+                            <option value="0">Upsloping</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Downsloping</option>
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>Major Vessels</span>
+                        <input type="number" name="ca" min="0" max="3" placeholder="0 to 3" required>
+                    </label>
+
+                    <label class="field">
+                        <span>Thalassemia</span>
+                        <select name="thal" required>
+                            <option value="" selected disabled>Select thal level</option>
+                            <option value="1">Normal</option>
+                            <option value="2">Fixed defect</option>
+                            <option value="3">Reversible defect</option>
+                        </select>
+                    </label>
+                </div>
+
+                <button type="submit">Run Risk Prediction</button>
             </form>
 
-            {% if response %}
-            <div class="response-box" role="status" aria-live="polite">
-                <h3>Assistant Response</h3>
-                <p>{{ response }}</p>
-            </div>
+            {% if result %}
+            <section class="response-box" aria-live="polite">
+                <h3>Prediction Result</h3>
+                <p>{{ result }}</p>
+            </section>
             {% endif %}
 
-            <p class="note">For emergency symptoms, seek immediate medical care.</p>
-        </section>
-    </main>
+            <p class="note">For educational use only. Always confirm with professional clinical evaluation.</p>
+        </main>
+    </div>
 </body>
 </html>
