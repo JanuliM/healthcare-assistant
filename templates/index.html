@@ -122,7 +122,7 @@
                 <button type="submit">Run Risk Prediction</button>
             </form>
 
-            {% if result %}
+            {% if prediction_made and result %}
             <section class="response-box" aria-live="polite">
                 <h3>Prediction Result</h3>
                 <p>{{ result }}</p>
