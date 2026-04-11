@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="health-card">
+            <div class="badge" aria-hidden="true">
+                <span class="badge-cross">+</span>
+                <span>Care Support</span>
+            </div>
+
+            <h1>Healthcare Assistant</h1>
+            <p class="subtitle">Describe your symptoms and receive a quick, general guidance note.</p>
+
+            <form method="post" class="symptom-form">
+                <label for="symptom" class="sr-only">Enter your symptoms</label>
+                <input id="symptom" type="text" name="symptom" placeholder="e.g., fever, headache, cough" required>
+                <button type="submit">Analyze Symptoms</button>
+            </form>
+
+            {% if response %}
+            <div class="response-box" role="status" aria-live="polite">
+                <h3>Assistant Response</h3>
+                <p>{{ response }}</p>
+            </div>
+            {% endif %}
+
+            <p class="note">For emergency symptoms, seek immediate medical care.</p>
+        </section>
+    </main>
+</body>
+</html>
